@@ -29,28 +29,28 @@ $(".gobtn").click(function(event) {
     var year = $("#year").val();
     if (year < 1950) {
         $("#tab-1").prop("checked", true);
-        changeContent(0);
+        changeContent("#tab-1");
     } else if (year < 1960) {
         $("#tab-2").prop("checked", true);
-        changeContent(1);
+        changeContent("#tab-2");
     } else if (year < 1970) {
         $("#tab-3").prop("checked", true);
-        changeContent(2);
+        changeContent("#tab-3");
     } else if (year < 1980) {
         $("#tab-4").prop("checked", true);
-        changeContent(3);
+        changeContent("#tab-4");
     } else if (year < 1990) {
         $("#tab-5").prop("checked", true);
-        changeContent(4);
+        changeContent("#tab-5");
     } else if (year < 2000) {
         $("#tab-6").prop("checked", true);
-        changeContent(5);
+        changeContent("#tab-6");
     } else if (year < 2010) {
         $("#tab-7").prop("checked", true);
-        changeContent(6);
+        changeContent("#tab-7");
     } else {
         $("#tab-8").prop("checked", true);
-        changeContent(7);
+        changeContent("#tab-8");
     }
 });
 
