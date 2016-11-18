@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link href="css/sweetalert.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <div class="left">
+        <div class="top">
+            <h1>Toy Time Machine</h1>
+            <div id="logo">
+                <h5>Created By </h5>
+                <img src="images/logo.svg">
+            </div>
+            <hr>
+        </div>
+        <div class="middle">
+            <h3>My Toy Collection</h3>
+            <div class="myToyImage" id="myToy1">
+            </div>
+            <div class="myToyImage" id="myToy2">
+            </div>
+            <div class="myToyImage" id="myToy3">
+            </div>
+            <div class="myToyImage" id="myToy4">
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <input type="range" id="yearSelection" min="1940" max="2010" step=10>
+        <h1 id="yearIndicator"></h1>
+        <div id="toys"></div>
+        <!-- <input type="button" onclick="createUser()"> -->
+    </div>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
