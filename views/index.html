@@ -12,30 +12,54 @@
 </head>
 
 <body>
+	<div class="hamburger" id="white"></div>
+	<div class="hamburger" id="black"></div>
     <div class="left">
         <div class="top">
             <h1>Toy Time Machine</h1>
             <div id="logo">
-                <h5>Created By </h5>
+                <a href="https://www.playpiper.com" target="_blank"><h5>Created By </h5>
                 <img src="images/logo.svg">
+                </a>
             </div>
             <hr>
         </div>
         <div class="middle">
             <h3>My Toy Collection</h3>
             <div class="myToyImage" id="myToy1">
+                <div class="deleteOverlay">
+                    <!-- <span class="deleteText">Remove Toy</span> -->
+                </div>
             </div>
             <div class="myToyImage" id="myToy2">
+                <div class="deleteOverlay">
+                    <!-- <span class="deleteText">Remove Toy</span> -->
+                </div>
             </div>
             <div class="myToyImage" id="myToy3">
+                <div class="deleteOverlay">
+                    <!-- <span class="deleteText">Remove Toy</span> -->
+                </div>
             </div>
             <div class="myToyImage" id="myToy4">
+                <div class="deleteOverlay">
+                    <!-- <span class="deleteText">Remove Toy</span> -->
+                </div>
             </div>
         </div>
     </div>
     <div class="right">
-        <input type="range" id="yearSelection" min="1940" max="2010" step=10>
-        <h1 id="yearIndicator"></h1>
+        <div class="topBar">
+            <div class="infoBox">
+            	<h4>Find your toys</h4>
+            	<h4>Search for your top favorite toys.</h4>
+            	<h4>Click to save them in your collection.</h4>
+            </div>
+            <div class="yearStuff">
+                <h2 id="yearIndicator"></h2>
+                <input type="range" id="yearSelection" min="1940" max="2010" value="1940" step=10>
+            </div>
+        </div>
         <div id="toys"></div>
         <!-- <input type="button" onclick="createUser()"> -->
     </div>

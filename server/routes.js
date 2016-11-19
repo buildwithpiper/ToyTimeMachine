@@ -21,6 +21,13 @@ module.exports = function(app) {
         console.log("Serving index");
     });
 
+    // Toybox route
+    app.route('/toybox').get(function(req, res) {
+        res.sendFile(path.join(__dirname + "/../views/toybox.html"));
+    });
+
+
+    // get toys
     app.route('/api/v1/toys/').get(function(req, res) {
         var year = req.query.year;
         var decade = req.query.decade;
@@ -79,6 +86,19 @@ module.exports = function(app) {
             user.save();
             console.log("Added name: " + user.name + " to id: " + user._id);
             res.json({ user: user });
+        })
+    });
+
+    // Remove a toy from a user's toy list
+    app.route('/api/v1/users/removetoy').get(function(req, res) {
+        var id = parseInt(req.query.id);
+        var toyIndex = req.query.toyIndex;
+        User.findOne({_id: {$eq: id}}, function(err, user) {
+            if (err) return console.log(err);
+            user.toys.splice(toyIndex, toyIndex + 1);
+            user.save();
+            res.json({ user: user });
+            console.log("Removed " + toyIndex + " from array: " + user.toys);
         })
     })
 };

@@ -1,0 +1,63 @@
+html, body {
+    margin: 0;
+    background: #110033;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	color: white;
+}
+
+a {
+	text-decoration: none;
+}
+
+.textbox {
+	width: 85%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 10%;
+}
+
+.imggrid {
+	width: 400px;
+	height: 400px;
+	margin: 0 auto;
+	margin-top: 120px;
+}
+
+.imggrid .imgbox{
+	border: 2px white solid;
+	width: 194px;
+	height: 194px;
+	display: inline-block;
+}
+
+.footer {
+	position: absolute;
+	bottom: 25px;
+	text-align: center;
+	width: 100%;
+}
+
+.footer img {
+    /*position: relative;*/
+    margin-left: 10px;
+    width: 200px;
+    display: inline-block;
+    vertical-align: middle;
+    /*float: right;*/
+}
+
+.footer h5 {
+	width: 50%;
+    color: white;
+    /*float: left;*/
+    display: inline;
+    font-size: 22px;
+}

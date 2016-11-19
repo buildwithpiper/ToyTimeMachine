@@ -1,11 +1,29 @@
 $(document).ready(function() {
 
-    $("#yearSelection").on("input change", function() {
+    $(window).resize(function() {
+        handleSlide();
+    })
+
+    $("#yearSelection").on("input", function() {
+        handleSlide();
         $("#yearIndicator").html($(this).val());
     })
 
     $("#yearSelection").change(function() {
         searchFor($(this).val());
+        $("#yearIndicator").html($(this).val());
+    })
+
+    $(".deleteOverlay").click(function() {
+        console.log(($(this)[0].parentElement.id).substr(-1));
+        removeToy(($(this)[0].parentElement.id).substr(-1));
+    })
+
+    $(".hamburger").click(function() {
+        $(".left").fadeToggle();
+        $("#white").fadeToggle();
+        $("#black").fadeToggle();
+
     })
 
     lightbox.option({
@@ -22,10 +40,14 @@ $(document).ready(function() {
 function populateToys() {
     if (localStorage.getItem("user") != null) {
         var user = JSON.parse(localStorage.getItem("user"));
-        console.log(user);
-        for (var i = 0; i < user.toys.length; i++) {
+        // console.log(user);
+        for (var i = 0; i < 4; i++) {
             console.log("url(\"" + user.toys[i] + "\")");
-            $("#myToy" + (i + 1)).css("background-image", "url(\"" + user.toys[i] + "\")");
+            if (user.toys[i]) {
+                $("#myToy" + (i + 1)).css("background-image", "url(\"" + user.toys[i] + "\")");
+            } else {
+                $("#myToy" + (i + 1)).css("background-image", "");
+            }
         }
     }
 }
@@ -44,22 +66,27 @@ function createUser() {
 }
 
 function addToy(toyUrl) {
-    // IF the user doesnt exist, create the user and add the toy
-    if (localStorage.getItem("user") == null) {
-        createAndAdd(toyUrl);
+    // Check if we are at max toys
+    if (JSON.parse(localStorage.getItem("user")).toys.length < 4) {
+        // IF the user doesnt exist, create the user and add the toy
+        if (localStorage.getItem("user") == null) {
+            createAndAdd(toyUrl);
+        } else {
+            var param = {
+                toyUrl: $(toyUrl).data("url"),
+                id: JSON.parse(localStorage.getItem("user"))._id
+            };
+            $.get("/api/v1/users/addtoy", param, function(data) {
+                if (data.user.length != 0) {
+                    console.log(data.user);
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    console.log(JSON.parse(localStorage.getItem("user")));
+                    populateToys();
+                }
+            });
+        }
     } else {
-        var param = {
-            toyUrl: $(toyUrl).data("url"),
-            id: JSON.parse(localStorage.getItem("user"))._id
-        };
-        $.get("/api/v1/users/addtoy", param, function(data) {
-            if (data.user.length != 0) {
-                console.log(data.user);
-                localStorage.setItem("user", JSON.stringify(data.user));
-                console.log(JSON.parse(localStorage.getItem("user")));
-                populateToys();
-            }
-        });
+        alert("You have reached the maximum number of toys");
     }
 }
 
@@ -76,6 +103,7 @@ function createAndAdd(toyUrl) {
                 if (data.user.length != 0) {
                     localStorage.setItem("user", JSON.stringify(data.user));
                     console.log(JSON.parse(localStorage.getItem("user")));
+                    populateToys();
                 }
             });
         }
@@ -102,4 +130,38 @@ function searchFor(query) {
             }
         }
     })
+}
+
+function removeToy(index) {
+    var param = {
+        id: JSON.parse(localStorage.getItem("user"))._id,
+        toyIndex: (index - 1)
+    };
+    $.get("/api/v1/users/removetoy", param, function(data) {
+        // if (data.toys.length != 0) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        populateToys();
+        // }
+    });
+}
+
+function getSliderWidth() {
+    var slider = $("#yearSelection");
+    var pointDistance = slider.width() / slider.prop("step");
+    console.log(pointDistance);
+    console.log(slider);
+}
+
+function handleSlide() {
+    var slider = $("#yearSelection");
+    var text = $("#yearIndicator");
+
+    var currentPosition = (slider.val() - slider.prop("min")) / 10;
+    var difference = slider.prop("max") - slider.prop("min");
+    var numSteps = difference / slider.prop("step");
+    var interval = (slider.width() - slider.width() * .03) / numSteps;
+
+    var newPos = currentPosition * interval;
+    text.css("left", (newPos - 10) + "px");
+    console.log(currentPosition);
 }
