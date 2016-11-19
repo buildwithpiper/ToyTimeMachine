@@ -66,12 +66,12 @@ function createUser() {
 }
 
 function addToy(toyUrl) {
-    // Check if we are at max toys
-    if (JSON.parse(localStorage.getItem("user")).toys.length < 4) {
-        // IF the user doesnt exist, create the user and add the toy
-        if (localStorage.getItem("user") == null) {
-            createAndAdd(toyUrl);
-        } else {
+    // IF the user doesnt exist, create the user and add the toy
+    if (localStorage.getItem("user") == null) {
+        createAndAdd(toyUrl);
+    } else {
+        // Check if we are at max toys
+        if (JSON.parse(localStorage.getItem("user")).toys.length < 4) {
             var param = {
                 toyUrl: $(toyUrl).data("url"),
                 id: JSON.parse(localStorage.getItem("user"))._id
@@ -84,9 +84,9 @@ function addToy(toyUrl) {
                     populateToys();
                 }
             });
+        } else {
+            alert("You have reached the maximum number of toys");
         }
-    } else {
-        alert("You have reached the maximum number of toys");
     }
 }
 
