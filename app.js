@@ -23,8 +23,8 @@ require("./server/routes")(app);
 app.use(express.static(path.join(__dirname, "public/")));
 
 // Start server
-server.listen(8080);
-console.log("Listening on port 8080");
+server.listen(80);
+console.log("Listening on port 80");
 
 //Expose app
 exports = module.exports = app;
