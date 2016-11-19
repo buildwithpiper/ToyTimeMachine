@@ -48,15 +48,16 @@ function getToys(db) {
                     console.log(error);
                 }
             });
-        }
     }
+}
 
 
 function getToysDecade(db) {
     var collection = db.collection("toys");
 
-    for (var i = 1940; i < 2011; i+=10) {
-        request(googleapi + "key=" + key + "&cx=" + cx + "&q=" + i + "'s toys&searchType=image&start=21",
+    for (var x = 1; x < 22; x+=10) {
+        for (var i = 1940; i < 2011; i += 10) {
+            request(googleapi + "key=" + key + "&cx=" + cx + "&q=" + i + "'s toys&searchType=image&start=" + x,
             function(error, response, body) {
                 if (response.statusCode == 200 && !error) {
                     var res = JSON.parse(body);
@@ -84,4 +85,5 @@ function getToysDecade(db) {
                 }
             });
         }
+    }
 }
