@@ -109,6 +109,10 @@ body {
     border-color: blue;
 }
 
+.left .middle hr {
+	margin-top: 40px;
+}
+
 .right {
     position: relative;
     float: right;

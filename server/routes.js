@@ -31,6 +31,7 @@ module.exports = function(app) {
     app.route('/api/v1/toys/').get(function(req, res) {
         var year = req.query.year;
         var decade = req.query.decade;
+        // sendFile(path.join(__dirname + "/toys/" + decade + "/"
         Toy.find({ decade: { $eq: decade } }, function(err, toys) {
             if (err) return handleError(err);
             res.json({ toys: toys });
