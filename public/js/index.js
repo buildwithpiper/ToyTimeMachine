@@ -36,7 +36,24 @@ $(document).ready(function() {
     // Adds user id to share url
     updateShareUrl();
 
+    $('.fbshare').click(generateImage);
 });
+
+function generateImage()
+{
+    var user = JSON.parse(localStorage.getItem("user"));
+    if(user.toys.length == 4)
+    {
+        param = {
+            id: user._id
+        };
+        $.get("/api/v1/toys/collage", param, function(data) {
+            $('meta[property="og:image"]').remove();
+            $('head').append( '<meta property="og:image" content="localhost:8000/collages/' + user._id  + '.jpg"/>' );
+        });
+    }
+    else alert("Pick 4 gifts first");
+}
 
 // Load images into boxes
 function populateToys() {
@@ -119,7 +136,7 @@ function searchFor(query) {
         if (data.toys.length != 0) {
             console.log(data.toys);
             for (var i = 0; i < data.toys.length; i++) {
-                $("#toys").append("<a href=\"" + data.toys[i].imageUrl + "\" data-lightbox=\"toy\" data-title=\"<input type='button' data-url='" + data.toys[i].imageUrl + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'\" src=\"" + data.toys[i].imageUrl + "\"/></a>")
+                $("#toys").append("<a href=\"" + data.toys[i] + "\" data-lightbox=\"toy\" data-title=\"<input type='button' data-url='" + data.toys[i] + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'\" src=\"" + data.toys[i] + "\"/></a>")
             }
         }
     })
@@ -139,8 +156,10 @@ function removeToy(index) {
 }
 
 function updateShareUrl() {
-    $(".fbshare").attr("href", "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.toytimemachine.us/toybox?_id=" + data.user._id + "%2F&amp;src=sdkpreparse");
-
+    if (localStorage.getItem("user") != null) {
+        var user = JSON.parse(localStorage.getItem("user"));
+        $(".fbshare").attr("href", "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.toytimemachine.us/toybox?_id=" + user._id + "%2F&amp;src=sdkpreparse");
+    }
 }
 
 function getSliderWidth() {

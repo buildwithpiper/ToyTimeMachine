@@ -9,6 +9,10 @@ var mongoose = require("mongoose");
 var Toy = require("../models/toy.js");
 var User = require("../models/user.js");
 var path = require("path");
+var fs = require("fs");
+
+var buildImage = require('./buildImage.js')
+
 
 // Store database connection
 var db = mongoose.connection;
@@ -31,13 +35,27 @@ module.exports = function(app) {
     app.route('/api/v1/toys/').get(function(req, res) {
         var year = req.query.year;
         var decade = req.query.decade;
+        
+        const dir = './public/toys/' + decade;
+        fs.readdir(dir, (err, files) => {
+          res.json({ toys: files.map(file => 'toys/' + decade + '/' + file) })
+        })
         // sendFile(path.join(__dirname + "/toys/" + decade + "/"
-        Toy.find({ decade: { $eq: decade } }, function(err, toys) {
+        /*Toy.find({ decade: { $eq: decade } }, function(err, toys) {
             if (err) return handleError(err);
             res.json({ toys: toys });
-        })
+        })*/
     });
 
+    // Create composite image
+    app.route('/api/v1/toys/collage').get(function(req, res) {
+        var id = req.query.id
+        User.findOne({ _id: { $eq: id } }, function(err, user) {
+            if (err) return console.log(err);
+            buildImage.preCreateImage(user.toys, id);
+            res.json( {collageUrl: "collages/" + id + ".jpg"} );
+        })
+    });
 
     /* USER ROUTES */
     // Create a user

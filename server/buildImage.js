@@ -7,58 +7,70 @@ var cropped = [];
 
 var numFinished = 0;
 
-
-for (var i = 0; i < 4; i++) {
-    // console.log(images[i]);
-    var filename = images[i].replace(/^.*[\\\/]/, '');
-    var outname = "tmp-" + filename;
-    cropped.push(outname);
-    gm(images[i])
-        .resize('70', '70', '^')
-        .gravity('Center')
-        .crop('70', '70')
-        .write(outname, function(err) {
-            if (err) console.log(err);
-            // console.log(cropped[i]);
-            numFinished++;
-            // ONLY ACTUALLY RUNS WHEN ALL 4 IMAGES ARE MADE
-            createImage();
-        });
+function preCreateImage(input, id)
+{
+    cropped = [];
+    numFinished = 0;
+    var result = null;
+    for (var i = 0; i < 4; i++) {
+        // console.log(images[i]);
+        var filename = 'public/' + input[i]
+        ///var filename = 'public/' + input[i].replace(/^.*[\\\/]/, '');
+        var outname = "tmp-" + input[i].replace(/^.*[\\\/]/, '');
+        cropped.push(outname);
+        gm(filename)
+            .resize('70', '70', '^')
+            .gravity('Center')
+            .crop('70', '70')
+            .write(outname, function(err) {
+                if (err) console.log(err);
+                // console.log(cropped[i]);
+                numFinished++;
+                // ONLY ACTUALLY RUNS WHEN ALL 4 IMAGES ARE MADE
+                createImage(id);
+            });
+    }
 }
 
-function createImage() {
+module.exports = {
+    preCreateImage: preCreateImage
+};
+
+function createImage(id) {
     if (numFinished < 4)
         return;
 
-    gm("border.png")
+    gm("server/border.png")
         .command("composite")
         .in("-geometry", "70x70+109+84")
         .in(cropped[0])
 
-    .write("test.jpg", function(err) {
+    .write("public/collages/" + id + ".jpg", function(err) {
         if (err) console.log(err);
-        gm("test.jpg")
+        gm("public/collages/" + id + ".jpg")
             .command("composite")
             .in("-geometry", "70x70+180+84")
             .in(cropped[1])
 
-        .write("test.jpg", function(err) {
+        .write("public/collages/" + id + ".jpg", function(err) {
             if (err) console.log(err);
-            gm("test.jpg")
+            gm("public/collages/" + id + ".jpg")
                 .command("composite")
                 .in("-geometry", "70x70+109+157")
                 .in(cropped[2])
 
-            .write("test.jpg", function(err) {
+            .write("public/collages/" + id + ".jpg", function(err) {
                 if (err) console.log(err);
-                gm("test.jpg")
+                gm("public/collages/" + id + ".jpg")
                     .command("composite")
                     .in("-geometry", "70x70+180+157")
                     .in(cropped[3])
 
-                .write("test.jpg", function(err) {
+                .write("public/collages/" + id + ".jpg", function(err) {
                     if (err) console.log(err);
                     deleteTempImages();
+                    console.log('done');
+                    return "public/collages/" + id + ".jpg";
                 })
             })
         })
