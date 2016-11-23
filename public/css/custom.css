@@ -29,14 +29,14 @@ body {
 .left h1 {
     font-size: 48px;
     color: white;
-    margin-bottom: 0;
+    margin: 0px;
 }
 
 .left #logo {
     width: 100%;
-    padding-top: 20px;
+    padding-top: 1vh;
     top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 2vh;
 }
 
 .left #logo img {
@@ -57,7 +57,8 @@ body {
 
 .left h3 {
     color: white;
-    font-size: 24px
+    font-size: 24px;
+    margin: 1vh;
 }
 
 .left .middle {
@@ -74,6 +75,15 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+
+@media screen and (max-height: 900px) {
+    .left .middle .myToyImage {
+        display: inline-block;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        margin-right: 1vh;
+    }
 }
 
 .left .middle .myToyImage .deleteOverlay {
@@ -93,6 +103,27 @@ body {
     display: block;
 }
 
+@media screen and (min-height: 600px) {
+    .left .bottom
+    {
+        position: absolute;
+        left: calc(50% - 50px);
+        bottom: 100px;
+
+        width: 92%;
+    }
+
+    .left .bottom hr
+    {
+        position: relative;
+        right: calc(50% - 50px);
+    }
+
+    .left .bottom .bottomInner
+    {
+        width: 100px;
+    }
+}
 
 /*.left .middle .myToyImage .deleteOverlay span {
 	position: relative;
@@ -117,7 +148,7 @@ body {
 }
 
 .left .middle hr {
-	margin-top: 40px;
+	margin-top: 2vh;
 }
 
 .right {

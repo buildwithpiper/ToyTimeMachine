@@ -87,6 +87,7 @@ function addToy(toyUrl) {
     // IF the user doesnt exist, create the user and add the toy
     if (localStorage.getItem("user") == null) {
         createAndAdd(toyUrl);
+        $('.lb-close').trigger("click");
     } else {
         // Check if we are at max toys
         if (JSON.parse(localStorage.getItem("user")).toys.length < 4) {
@@ -100,6 +101,7 @@ function addToy(toyUrl) {
                     populateToys();
                 }
             });
+            $('.lb-close').trigger("click");
         } else {
             alert("You have reached the maximum number of toys");
         }
