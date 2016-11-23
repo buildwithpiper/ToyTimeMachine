@@ -107,7 +107,7 @@ body {
 }
 
 @media screen and (min-height: 600px) {
-    .left .bottom
+    /*.left .bottom
     {
         position: absolute;
         left: calc(50% - 90px);
@@ -125,7 +125,7 @@ body {
     .left .bottom .bottomInner
     {
         width: 180px;
-    }
+    }*/
 }
 
 /*.left .middle .myToyImage .deleteOverlay span {
@@ -226,7 +226,16 @@ body {
     display: none;
 }
 
+.fb-share-button img
+{
+    height: 60px;
+}
+
 @media screen and (max-width: 1000px) { /* Mobile */
+    .fb-share-button img
+    {
+        height: 60px;
+    }
     input[type='range']::-webkit-slider-thumb {
         width: 3em !important;
         height: 3em !important;
@@ -254,6 +263,8 @@ body {
         z-index: 1000;
         display: none;
         width: 40%;
+
+        overflow-y: scroll;
     }
     .left .cover
     {
@@ -265,8 +276,10 @@ body {
 
         background: rgba(0, 0, 0, 0.8);
 
-        width: 60%;
+        width: 1000px;
         height: 100%;
+
+        z-index: 99999;
     }
     .left h3 {
         font-size: 36px;
@@ -533,10 +546,13 @@ input[type='range']:focus {
 
     background: white;
 
+    font-size: 32px;
+
     width: 60%;
 
     padding: 25px;
     padding-bottom: 15px;
+    padding-left: 50px;
 }
 
 .instructContainer ul
@@ -565,7 +581,7 @@ input[type='range']:focus {
 
     background: #37C42F;
 
-    font-size: 22px;
+    font-size: inherit;
     color: white;
 
     width: 60%;
