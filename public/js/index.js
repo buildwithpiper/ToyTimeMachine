@@ -14,14 +14,21 @@ $(document).ready(function() {
         $("#yearIndicator").html($(this).val());
     });
 
+    $(".left .cover").on("click", function()
+    {
+        $(".left").fadeToggle();
+        //$("#white").fadeToggle();
+        $("#black").fadeToggle();
+    });
+
     if(isMobile())
     {
         $(".myToyImage").on("click", function(event) {
             removeToy($(this)[0].id.substr(-1));
-            if(JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
+            if(JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1))
             {
                 $(".left").fadeToggle();
-                $("#white").fadeToggle();
+                //$("#white").fadeToggle();
                 $("#black").fadeToggle();
             }
 
@@ -37,7 +44,7 @@ $(document).ready(function() {
             if(isMobile() && JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
             {
                 $(".left").fadeToggle();
-                $("#white").fadeToggle();
+                //$("#white").fadeToggle();
                 $("#black").fadeToggle();
             }
 
@@ -50,7 +57,7 @@ $(document).ready(function() {
 
     $(".hamburger").click(function() {
         $(".left").fadeToggle();
-        $("#white").fadeToggle();
+        //$("#white").fadeToggle();
         $("#black").fadeToggle();
 
     });
@@ -169,7 +176,7 @@ function addToy(toyUrl) {
     {
 
         $(".left").fadeToggle();
-        $("#white").fadeToggle();
+        //$("#white").fadeToggle();
         $("#black").fadeToggle();
     }
 }
