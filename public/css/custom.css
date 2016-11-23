@@ -243,6 +243,9 @@ body {
         background-position: 50% 50%;
         background-size: cover;
     }
+    .right #toys img {
+        height: 200px;
+    }
     .infoBox
     {
         display: none;
@@ -289,10 +292,6 @@ body {
         top: 0;
         width: 50%;
         height: 80%;
-    }
-    .right #toys img {
-        height: 100px;
-        margin: 5px;
     }
 }
 
@@ -529,10 +528,18 @@ input[type='range']:focus {
 
 #loading
 {
-    position: relative;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    
+
     display: none;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    width: 100px;
+    height: 100px;
+
+    padding: 20px;
 }
 
 .logo-img {

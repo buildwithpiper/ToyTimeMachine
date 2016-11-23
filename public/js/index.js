@@ -61,11 +61,11 @@ $(document).ready(function() {
         });
     }
 
-    $(window).on("scroll", function()
-    {
-        if($(window).scrollTop() == $(document).height() - $(window).height())
-        {
-            if(!$('#loading').is(":visible"))
+    $(document).on("scroll", function()
+    {//console.log($(window).scrollTop() + "==" + $(document).height() + " - 70 - " + $(window).height());
+        if($(window).scrollTop() >= $(document).height() - 70 - $(window).height())
+        {console.log("bottom");
+            if(!$('#loading').is(":visible") && imagesLoading == 0)
             {
                 loadNewToys();
             }
@@ -218,6 +218,11 @@ function loadNewToys()
     }
 }
 
+function lastToyCreatesScrollbar()
+{
+    return $("#toys a:last-child").offset().top > $(window).height();
+}
+
 function imageLoaded()
 {
     imagesLoading--;
@@ -225,6 +230,11 @@ function imageLoaded()
     if(imagesLoading == 0)
     {
         $("#loading").hide();
+
+        if(!lastToyCreatesScrollbar())
+        {
+            loadNewToys();
+        }
     }
 }
 
