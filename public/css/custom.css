@@ -108,7 +108,7 @@ body {
     .left .bottom
     {
         position: absolute;
-        left: calc(50% - 50px);
+        left: calc(50% - 90px);
         bottom: 100px;
 
         width: 92%;
@@ -117,12 +117,12 @@ body {
     .left .bottom hr
     {
         position: relative;
-        right: calc(50% - 50px);
+        right: calc(50% - 90px);
     }
 
     .left .bottom .bottomInner
     {
-        width: 100px;
+        width: 180px;
     }
 }
 
@@ -177,7 +177,7 @@ body {
     position: absolute;
     right: 20px;
     top: 0;
-    width: 70%;
+    width: 50%;
     height: 100%;
 }
 
@@ -207,7 +207,7 @@ body {
     position: absolute;
     padding: 15px 10px;
     top: 0;
-    width: 25%;
+    width: 50%;
     height: 80%;
 }
 
@@ -287,7 +287,7 @@ body {
         position: absolute;
         right: 60px;
         top: 0;
-        width: 60%;
+        width: 50%;
         height: 80%;
     }
     .right #toys img {
@@ -530,4 +530,8 @@ input[type='range']:focus {
 #loading
 {
     display: none;
+}
+
+.logo-img {
+    width: 65%;
 }

@@ -121,6 +121,7 @@ function addToy(toyUrl) {
     if (localStorage.getItem("user") == null) {
         createAndAdd(toyUrl);
         $('.lb-close').trigger("click");
+
     } else {
         // Check if we are at max toys
         if (JSON.parse(localStorage.getItem("user")).toys.length < 4) {
@@ -138,6 +139,13 @@ function addToy(toyUrl) {
         } else {
             alert("You have reached the maximum number of toys");
         }
+    }
+    if(isMobile())
+    {
+
+        $(".left").fadeToggle();
+        $("#white").fadeToggle();
+        $("#black").fadeToggle();
     }
 }
 
