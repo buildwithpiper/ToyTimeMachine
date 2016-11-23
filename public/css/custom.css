@@ -219,6 +219,11 @@ body {
     display: none;
 }
 
+.left .cover
+{
+    display: none;
+}
+
 @media screen and (max-width: 1000px) { /* Mobile */
     input[type='range']::-webkit-slider-thumb {
         height: 3em !important;
@@ -243,17 +248,30 @@ body {
     .left {
         z-index: 1000;
         display: none;
-        width: 100%;
+        width: 40%;
+    }
+    .left .cover
+    {
+        display: block;
+
+        position: fixed;
+        top: 0px;
+        left: calc(40% + 20px);
+
+        background: rgba(0, 0, 0, 0.8);
+
+        width: 60%;
+        height: 100%;
     }
     .left h3 {
-        font-size: 48px;
+        font-size: 36px;
     }
     .left .middle .myToyImage
     {
         display: inline-block;
 
-        width: 250px;
-        height: 250px;
+        width: 175px;
+        height: 175px;
 
         margin-top: 1vh;
         margin-bottom: 1vh;
