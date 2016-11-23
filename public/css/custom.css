@@ -437,3 +437,12 @@ input[type='range']:focus {
     /*  box-shadow: 0 .125em .125em #fff;
   background-color: rgba(255, 255, 255, 0.32);*/
 }
+
+.logo-img {
+    width: 65%;
+
+}
+
+.logo-link {
+    text-decoration: none; color: white; font-size: 18px;
+}
