@@ -1,13 +1,13 @@
 @font-face
 {
     font-family: Klavika;
-    src: url('Klavika Regular Plain.otf');
+    src: url('css/Klavika Regular Plain.otf');
 }
 
 body {
     margin: 0;
     overflow-x: hidden;
-    font-family: Klavika;
+    font-family: Klavika, sans;
 }
 
 .right #toys img {
@@ -71,6 +71,7 @@ body {
     margin: 20px auto;
     border-width: 5px;
     border-style: solid;
+    border-radius: 10px;
     background-image: url("../images/no-toy-selected.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -132,19 +133,19 @@ body {
 }*/
 
 .left .middle #myToy1 {
-    border-color: red;
+    border-color: #e13e5b;
 }
 
 .left .middle #myToy2 {
-    border-color: yellow;
+    border-color: #eecc49;
 }
 
 .left .middle #myToy3 {
-    border-color: green;
+    border-color: #8cc347;
 }
 
 .left .middle #myToy4 {
-    border-color: blue;
+    border-color: #1fa2d6;
 }
 
 .left .middle hr {
