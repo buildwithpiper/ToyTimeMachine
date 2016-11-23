@@ -15,7 +15,14 @@ $(document).ready(function() {
     })
 
     $(".deleteOverlay").click(function() {
+
         removeToy(($(this)[0].parentElement.id).substr(-1));
+        if(isMobile() && JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
+        {
+            $(".left").fadeToggle();
+            $("#white").fadeToggle();
+            $("#black").fadeToggle();
+        }
     })
 
     $(".hamburger").click(function() {
@@ -189,7 +196,7 @@ function searchFor(query) {
             currentDecade = query;
             loadCount = 0;
 
-            console.log(data.toys);
+            //console.log(data.toys);
 
             loadNewToys();
         }
