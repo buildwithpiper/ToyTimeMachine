@@ -311,5 +311,6 @@ function handleSlide() {
     var interval = (slider.width() - slider.width() * .03) / numSteps;
 
     var newPos = currentPosition * interval;
-    text.css("left", (newPos - 10) + "px");
+    var distanceFromLeft = newPos - 10;
+    text.css({"left": (newPos - 10) + "px", "width": "calc(100% - " + distanceFromLeft + "px)"});
 }
