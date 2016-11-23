@@ -2,40 +2,63 @@ $(document).ready(function() {
 
     $(window).resize(function() {
         handleSlide();
-    })
+    });
 
     $("#yearSelection").on("input", function() {
         handleSlide();
         $("#yearIndicator").html($(this).val());
-    })
+    });
 
     $("#yearSelection").change(function() {
         searchFor($(this).val());
         $("#yearIndicator").html($(this).val());
-    })
+    });
 
-    $(".deleteOverlay").click(function() {
+    if(isMobile())
+    {
+        $(".myToyImage").on("click", function(event) {
+            removeToy($(this)[0].id.substr(-1));
+            if(JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
+            {
+                $(".left").fadeToggle();
+                $("#white").fadeToggle();
+                $("#black").fadeToggle();
+            }
 
-        removeToy(($(this)[0].parentElement.id).substr(-1));
-        if(isMobile() && JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
-        {
-            $(".left").fadeToggle();
-            $("#white").fadeToggle();
-            $("#black").fadeToggle();
-        }
-    })
+            event.preventDefault();
+            return false;
+        });
+    }
+    else
+    {
+        $(".deleteOverlay").click(function() {
+
+            removeToy(($(this)[0].parentElement.id).substr(-1));
+            if(isMobile() && JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
+            {
+                $(".left").fadeToggle();
+                $("#white").fadeToggle();
+                $("#black").fadeToggle();
+            }
+
+            /*if(isMobile())
+            {
+                $(this).hide();
+            }*/
+        });
+    }
 
     $(".hamburger").click(function() {
         $(".left").fadeToggle();
         $("#white").fadeToggle();
         $("#black").fadeToggle();
 
-    })
+    });
 
     lightbox.option({
         'showImageNumberLabel': false,
         'wrapAround': true
-    })
+    });
 
     // Do initial load
     searchFor(1940);
@@ -62,14 +85,8 @@ $(document).ready(function() {
     }
 
     $(document).on("scroll", function()
-    {//console.log($(window).scrollTop() + "==" + $(document).height() + " - 70 - " + $(window).height());
-        if($(window).scrollTop() >= $(document).height() - 70 - $(window).height())
-        {console.log("bottom");
-            if(!$('#loading').is(":visible") && imagesLoading == 0)
-            {
-                loadNewToys();
-            }
-        }
+    {
+        checkScroll();
     });
 });
 
@@ -180,6 +197,16 @@ function clearLocalUser() {
     localStorage.removeItem("user");
 }
 
+function checkScroll()
+{
+    if($(window).scrollTop() >= $(document).height() - 70 - $(window).height())
+    {
+        if(!$('#loading').is(":visible") && imagesLoading == 0)
+        {
+            loadNewToys();
+        }
+    }
+}
 
 function searchFor(query) {
     var param = {
@@ -210,7 +237,7 @@ function loadNewToys()
         $("#loading").show();
 
         for (var i = loadCount * TOY_LOAD_LIMIT; i < Math.min((loadCount + 1) * TOY_LOAD_LIMIT, imagePaths[currentDecade].length); i++) {
-            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'><div>+</div> Add this Toy</button>\"</a><img onerror=\"this.style.display='none'\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'><div>+</div> Add this Toy</button>\"</a><img onerror=\"this.style.display='none'; imageLoaded()\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
             imagesLoading++;
         }
 
@@ -234,6 +261,10 @@ function imageLoaded()
         if(!lastToyCreatesScrollbar())
         {
             loadNewToys();
+        }
+        else
+        {
+            checkScroll();
         }
     }
 }

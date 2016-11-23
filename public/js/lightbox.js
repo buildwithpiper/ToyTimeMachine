@@ -286,6 +286,21 @@
 
       $preloader = $(preloader);
 
+      if(isMobile())
+      {
+        if(preloader.height < $(window).height() * 0.8)
+        {
+          preloader.height = Math.min(preloader.height * 1.2, $(window).height() - 100);
+        }
+
+        if(preloader.width < $(window).width() * 0.8)
+        {
+          preloader.width = Math.min(preloader.width * 1.2, $(window).width() - 200);
+        }
+        //preloader.width *= 2;
+        //preloader.height *= 1.3;
+      }
+
       $image.width(preloader.width);
       $image.height(preloader.height);
 
@@ -312,14 +327,13 @@
           if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
             imageWidth  = maxImageWidth;
             imageHeight = parseInt(preloader.height / (preloader.width / imageWidth), 10);
-            $image.width(imageWidth);
-            $image.height(imageHeight);
           } else {
             imageHeight = maxImageHeight;
             imageWidth = parseInt(preloader.width / (preloader.height / imageHeight), 10);
-            $image.width(imageWidth);
-            $image.height(imageHeight);
           }
+
+          $image.width(imageWidth);
+          $image.height(imageHeight);
         }
       }
       self.sizeContainer($image.width(), $image.height());

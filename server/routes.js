@@ -114,7 +114,7 @@ module.exports = function(app) {
         var toyIndex = req.query.toyIndex;
         User.findOne({_id: {$eq: id}}, function(err, user) {
             if (err) return console.log(err);
-            user.toys.splice(toyIndex, toyIndex + 1);
+            user.toys.splice(toyIndex, 1);
             user.save();
             res.json({ user: user });
             console.log("Removed " + toyIndex + " from array: " + user.toys);
