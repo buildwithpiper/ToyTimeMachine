@@ -37,6 +37,8 @@ body {
     padding-top: 1vh;
     top: 30px;
     margin-bottom: 2vh;
+    color: white;
+    font-weight: bold;
 }
 
 .left #logo img {
