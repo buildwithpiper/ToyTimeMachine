@@ -41,7 +41,40 @@ $(document).ready(function() {
     updateShareUrl();
 
     //$('.fbshare').click(generateImage);
+
+    if(isMobile()) { // Instructions for mobile users/other mobile setup
+        $("body").append("<div id='instructCover'><div class='instructContainer'><h4>Instructions:</h4><ul><li>Scroll through the decades.</li><li>Add 4 toys that changed your life to your toy box.</li><li>Share your collection with your loved ones.</li></ul><div class='instructButtonContainer'><button id='instructClose'>Ok got it!</button></div></div></div>");
+    
+        $('#instructClose').on("click", function()
+        {
+            $('#instructCover').fadeOut(300, function()
+            {
+                $(this).remove();
+            });
+        });
+    }
+
+    $(window).on("scroll", function()
+    {
+        if($(window).scrollTop() == $(document).height() - $(window).height())
+        {
+            if(!$('#loading').is(":visible"))
+            {
+                loadNewToys();
+            }
+        }
+    });
 });
+
+var imagePaths = {1940: [], 1950: [], 1960: [], 1970: [], 1980: [], 1990: [], 2000: [], 2010: []};
+var loadCount = 0;
+var currentDecade = 0;
+var TOY_LOAD_LIMIT = 30;
+
+function isMobile()
+{
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+}
 
 function generateImage()
 {
@@ -139,12 +172,35 @@ function searchFor(query) {
     $("#toys").html("");
     $.get("/api/v1/toys/", param, function(data) {
         if (data.toys.length != 0) {
-            //console.log(data.toys);
-            for (var i = 0; i < data.toys.length; i++) {
-                $("#toys").append("<a href=\"" + data.toys[i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + data.toys[i] + "' onclick='addToy(this)' class='addToybox'>Add to box</button>\"</a><img onerror=\"this.style.display='none'\" src=\"" + data.toys[i] + "\"/></a>")
+            if(imagePaths[query].length == 0)
+            {
+                imagePaths[query] = data.toys;
             }
+
+            currentDecade = query;
+            loadCount = 0;
+
+            console.log(data.toys);
+
+            loadNewToys();
         }
     })
+}
+
+function loadNewToys()
+{
+    if(loadCount * TOY_LOAD_LIMIT < imagePaths[currentDecade].length)
+    {
+        $("#loading").show();
+
+        for (var i = loadCount * TOY_LOAD_LIMIT; i < Math.min((loadCount + 1) * TOY_LOAD_LIMIT, imagePaths[currentDecade].length); i++) {
+            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'><div>+</div> Add this Toy</button>\"</a><img onerror=\"this.style.display='none'\" src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+        }
+
+        loadCount++;
+
+        $("#loading").hide();
+    }
 }
 
 function removeToy(index) {
