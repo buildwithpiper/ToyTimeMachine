@@ -1,6 +1,13 @@
+@font-face
+{
+    font-family: Klavika;
+    src: url('Klavika Regular Plain.otf');
+}
+
 body {
     margin: 0;
     overflow-x: hidden;
+    font-family: Klavika;
 }
 
 .right #toys img {

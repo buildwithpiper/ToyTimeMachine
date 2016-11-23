@@ -30,6 +30,10 @@ $(document).ready(function() {
         'wrapAround': true
     })
 
+    // Do initial load
+    searchFor(1940);
+    $("#yearIndicator").html(1940);
+
     // Load images into boxes
     populateToys();
 
@@ -48,8 +52,8 @@ function generateImage()
             id: user._id
         };
         $.get("/api/v1/toys/collage", param, function(data) {
-            $('meta[property="og:image"]').remove();
-            $('head').append( '<meta property="og:image" content="toytimemachine.us/collages/' + user._id  + '.jpg"/>' );
+            //$('meta[property="og:image"]').remove();
+            //$('head').append( '<meta property="og:image" content="toytimemachine.us/collages/' + user._id  + '.jpg"/>' );
         });
     }
 }
@@ -133,7 +137,7 @@ function searchFor(query) {
     $("#toys").html("");
     $.get("/api/v1/toys/", param, function(data) {
         if (data.toys.length != 0) {
-            console.log(data.toys);
+            //console.log(data.toys);
             for (var i = 0; i < data.toys.length; i++) {
                 $("#toys").append("<a href=\"" + data.toys[i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + data.toys[i] + "' onclick='addToy(this)' class='addToybox'>Add to box</button>\"</a><img onerror=\"this.style.display='none'\" src=\"" + data.toys[i] + "\"/></a>")
             }
