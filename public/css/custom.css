@@ -529,6 +529,9 @@ input[type='range']:focus {
 
 #loading
 {
+    position: relative;
+    left: 50%;
+    
     display: none;
 }
 

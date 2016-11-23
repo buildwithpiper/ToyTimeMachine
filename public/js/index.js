@@ -69,6 +69,7 @@ $(document).ready(function() {
 var imagePaths = {1940: [], 1950: [], 1960: [], 1970: [], 1980: [], 1990: [], 2000: [], 2010: []};
 var loadCount = 0;
 var currentDecade = 0;
+var imagesLoading = 0;
 var TOY_LOAD_LIMIT = 30;
 
 function isMobile()
@@ -202,11 +203,20 @@ function loadNewToys()
         $("#loading").show();
 
         for (var i = loadCount * TOY_LOAD_LIMIT; i < Math.min((loadCount + 1) * TOY_LOAD_LIMIT, imagePaths[currentDecade].length); i++) {
-            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'><div>+</div> Add this Toy</button>\"</a><img onerror=\"this.style.display='none'\" src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'><div>+</div> Add this Toy</button>\"</a><img onerror=\"this.style.display='none'\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+            imagesLoading++;
         }
 
         loadCount++;
+    }
+}
 
+function imageLoaded()
+{
+    imagesLoading--;
+
+    if(imagesLoading == 0)
+    {
         $("#loading").hide();
     }
 }
