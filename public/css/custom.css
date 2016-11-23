@@ -7,7 +7,7 @@
 body {
     margin: 0;
     overflow-x: hidden;
-    font-family: Klavika, sans;
+    font-family: Klavika, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .right #toys img {
@@ -532,8 +532,6 @@ input[type='range']:focus {
     left: calc(20% - 10px);
 
     background: white;
-
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
     width: 60%;
 
