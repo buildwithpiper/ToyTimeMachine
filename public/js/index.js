@@ -68,8 +68,8 @@ $(document).ready(function() {
     });
 
     // Do initial load
-    searchFor(1940);
-    $("#yearIndicator").html(1940);
+    searchFor(1970);
+    $("#yearIndicator").html(1970);
 
     // Load images into boxes
     populateToys();
