@@ -252,7 +252,7 @@ function loadNewToys()
     }
     else if(!$('#seenAll').is(":visible"))
     {
-        $("#toys").append("<a href='https://playpiper.com'><div id='seenAll'>You've seen all the toys in this decade!<br>Created by <img src='images/logo.svg'></div></a>");
+        $("#toys").append("<a href='https://playpiper.com/?utm_source=toytimemachine'><div id='seenAll'>You've seen all the toys in this decade!<br>Created by <img src='images/logo.svg'></div></a>");
     }
 }
 
