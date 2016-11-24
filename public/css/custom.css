@@ -24,6 +24,7 @@ body {
     width: 15%;
     background: #110033;
     padding: 1%;
+    overflow-y: scroll;
 }
 
 .left h1 {
