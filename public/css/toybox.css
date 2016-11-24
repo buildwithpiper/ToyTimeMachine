@@ -6,11 +6,106 @@
 
 html, body {
     margin: 0;
-    background: #110033;
+    background: url('../images/background.png') #110033;
+    background-size: cover;
     font-family: Klavika, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-h1,
+.wrapper
+{
+	margin: auto;
+}
+
+.logoContainer
+{
+	position: relative;
+	top: 30px;
+	left: 30px;
+
+	float: left;
+
+	text-align: center;
+}
+
+.logo
+{
+	width: 65%;
+
+	margin-bottom: 20px;
+}
+
+.created
+{
+	color: white;
+}
+
+.created > img
+{
+	width: 200px;
+
+	vertical-align: middle;
+}
+
+.midWrapper
+{
+	position: relative;
+	bottom: 100px;
+
+	clear: left;
+
+	text-align: center;
+	color: white;
+
+	swidth: 700px;
+}
+
+h3
+{
+	font-size: 32px;
+}
+
+.imggrid {
+	width: 422px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
+.imggrid .imgbox{
+	width: 160px;
+	height: 160px;
+	display: inline-block;
+	border-width: 7px;
+    border-style: solid;
+    border-radius: 10px;
+    background-image: url("../images/no-toy-selected.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    margin: 5px;
+}
+
+.imgbox {
+    background-size: contain;
+}
+
+#img1 {
+    border-color: #e13e5b;
+}
+
+#img2 {
+    border-color: #eecc49;
+}
+
+#img3 {
+    border-color: #8cc347;
+}
+
+#img4 {
+    border-color: #1fa2d6;
+}
+
+/*h1,
 h2,
 h3,
 h4,
@@ -58,21 +153,21 @@ a {
 
 .footer img {
     /*position: relative;*/
-    margin-left: 10px;
+    /*margin-left: 10px;
     width: 200px;
     display: inline-block;
     vertical-align: middle;
     /*float: right;*/
-}
+/*}
 
 .footer h5 {
 	width: 50%;
     color: white;
     /*float: left;*/
-    display: inline;
+    /*display: inline;
     font-size: 22px;
 }
 
 #toybox-title {
     color: lawngreen
-}
+}*/

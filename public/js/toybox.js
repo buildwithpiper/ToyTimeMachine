@@ -1,10 +1,11 @@
 
 // Load images into boxes
-function populateToys() {
+/*function populateToys() {
     var param = { id: QueryString['_id'] };
     $.get("/api/v1/users/get", param, function(data)     {
         if (data.user.length != 0) {
             user = data.user;
+
             for (var i = 0; i < 4; i++) {
                 if (user.toys[i]) {
                     $("#img" + (i + 1)).css("background-image", "url(\"" + user.toys[i] + "\")");
@@ -15,7 +16,22 @@ function populateToys() {
         }
         else alert('user ' + param['id'] + ' not found');
     });
+}*/
+
+function populateToys() {
+    if (localStorage.getItem("user") != null) {
+        var user = JSON.parse(localStorage.getItem("user"));console.log(user);
+        for (var i = 0; i < 4; i++) {
+            if (user.toys[i]) {
+              console.log("set");
+                $("#img" + (i + 1)).css("background-image", "url(\"" + user.toys[i] + "\")");
+            }/* else {
+                $("#img" + (i + 1)).css("background-image", "");
+            }*/
+        }
+    }
 }
+
 var QueryString = function () {
   // This function is anonymous, is executed immediately and 
   // the return value is assigned to QueryString!
@@ -39,5 +55,7 @@ var QueryString = function () {
     return query_string;
 }();
 
-console.log(QueryString);
-populateToys();
+$(document).ready(function()
+{
+  populateToys();
+});
