@@ -250,6 +250,10 @@ function loadNewToys()
 
         loadCount++;
     }
+    else if(!$('#seenAll').is(":visible"))
+    {
+        $("#toys").append("<a href='https://playpiper.com'><div id='seenAll'>You've seen all the toys in this decade!<br>Created by <img src='images/logo.svg'></div></a>");
+    }
 }
 
 function lastToyCreatesScrollbar()
