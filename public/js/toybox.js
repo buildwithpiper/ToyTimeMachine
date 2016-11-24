@@ -30,6 +30,10 @@ function populateToys() {
                     if (user.toys[i]) {
                         $("#img" + (i + 1)).css("background-image", "url(\"" + user.toys[i] + "\")");
                     }
+                    else
+                    {
+                        $("#img" + (i + 1)).css("background-image", "");
+                    }
                 }
             }
         });
