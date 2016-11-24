@@ -6,9 +6,18 @@
 
 html, body {
     margin: 0;
-    background: url('../images/background.png') #110033;
+    background: url('../images/background.png') center center fixed #110033;
     background-size: cover;
     font-family: Klavika, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.link
+{
+	position: relative;
+
+	text-decoration: none;
+
+	z-index: 10;
 }
 
 .wrapper
@@ -43,6 +52,8 @@ html, body {
 {
 	width: 200px;
 
+	margin-left: 5px;
+
 	vertical-align: middle;
 }
 
@@ -55,8 +66,6 @@ html, body {
 
 	text-align: center;
 	color: white;
-
-	swidth: 700px;
 }
 
 h3
@@ -103,6 +112,47 @@ h3
 
 #img4 {
     border-color: #1fa2d6;
+}
+
+@media screen and (max-width: 1000px) { /* Mobile */
+	.logoContainer
+	{
+		top: 20px;
+		left: 0px;
+
+		float: none;
+	}
+
+	.logo
+	{
+		width: 200px;
+	}
+
+	.created
+	{
+		margin-bottom: 50px;
+	}
+
+	.midWrapper
+	{
+		position: static;
+	}
+
+	.imggrid
+	{
+		width: 702px;
+	}
+
+	.imggrid .imgbox
+	{
+		width: 300px;
+		height: 300px;
+	}
+
+	.button img
+	{
+		height: 80px;
+	}
 }
 
 /*h1,
