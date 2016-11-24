@@ -1,6 +1,13 @@
+@font-face
+{
+    font-family: Klavika;
+    src: url('css/Klavika Regular Plain.otf');
+}
+
 html, body {
     margin: 0;
     background: #110033;
+    font-family: Klavika, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1,
