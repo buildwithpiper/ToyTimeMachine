@@ -17,9 +17,7 @@ $(document).ready(function() {
 
     $(".left .cover").on("click", function()
     {
-        $(".left").fadeToggle();
-        //$("#white").fadeToggle();
-        $("#black").fadeToggle();
+        toggleMenu();
     });
 
     if(isMobile())
@@ -28,9 +26,7 @@ $(document).ready(function() {
             removeToy($(this)[0].id.substr(-1));
             if(JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1))
             {
-                $(".left").fadeToggle();
-                //$("#white").fadeToggle();
-                $("#black").fadeToggle();
+                toggleMenu();
             }
 
             event.preventDefault();
@@ -44,9 +40,7 @@ $(document).ready(function() {
             removeToy(($(this)[0].parentElement.id).substr(-1));
             if(isMobile() && JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
             {
-                $(".left").fadeToggle();
-                //$("#white").fadeToggle();
-                $("#black").fadeToggle();
+                toggleMenu();
             }
 
             /*if(isMobile())
@@ -57,9 +51,7 @@ $(document).ready(function() {
     }
 
     $(".hamburger").click(function() {
-        $(".left").fadeToggle();
-        //$("#white").fadeToggle();
-        $("#black").fadeToggle();
+        toggleMenu();
 
     });
 
@@ -103,6 +95,15 @@ var loadCount = 0;
 var currentDecade = 0;
 var imagesLoading = 0;
 var TOY_LOAD_LIMIT = 30;
+
+function toggleMenu()
+{
+    /*$(".left").fadeToggle();
+    //$("#white").fadeToggle();
+    $("#black").fadeToggle();*/
+
+    $(".left, #black").toggle("slide");
+}
 
 function isMobile()
 {
@@ -175,10 +176,7 @@ function addToy(toyUrl) {
     }
     if(isMobile())
     {
-
-        $(".left").fadeToggle();
-        //$("#white").fadeToggle();
-        $("#black").fadeToggle();
+        toggleMenu();
     }
 }
 
@@ -245,7 +243,7 @@ function loadNewToys()
         $("#loading").show();
 
         for (var i = loadCount * TOY_LOAD_LIMIT; i < Math.min((loadCount + 1) * TOY_LOAD_LIMIT, imagePaths[currentDecade].length); i++) {
-            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<button data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'><div>+</div> Add this Toy</button>\"</a><img onerror=\"this.style.display='none'; imageLoaded()\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<img src='images/addToy.png' data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'; imageLoaded()\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
             imagesLoading++;
         }
 

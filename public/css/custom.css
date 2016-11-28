@@ -24,7 +24,7 @@ body {
     width: 15%;
     background: #110033;
     padding: 1%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .left h1 {
@@ -69,8 +69,8 @@ body {
 }
 
 .left .middle .myToyImage {
-    width: 96px;
-    height: 96px;
+    width: 84px;
+    height: 84px;
     margin: 20px auto;
     border-width: 5px;
     border-style: solid;
@@ -229,10 +229,30 @@ body {
 
 .fb-share-button img
 {
-    height: 50px;
+    width: 100%;
+    /*height: 50px;*/
+
+    margin-bottom: 13px;
+}
+
+.addToybox
+{
+    position: relative;
+    bottom: 40px;
+    right: 64px;
+
+    z-index: 99999;
 }
 
 @media screen and (max-width: 1000px) { /* Mobile */
+    .addToybox
+    {
+        bottom: 100px;
+        right: 124px;
+
+        width: 200px;
+        height: 200px;
+    }
     .fb-share-button img
     {
         height: 60px;
@@ -356,6 +376,98 @@ body {
         top: 0;
         width: 50%;
         height: 80%;
+    }
+}
+
+.logo-img {
+    width: 65%;
+}
+
+#instructCover
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    width: 100%;
+    height: 100%;
+}
+
+.instructContainer
+{
+    position: relative;
+    top: 15%;
+    left: calc(20% - 10px);
+
+    background: white;
+
+    font-size: 50px;
+
+    width: 60%;
+
+    padding: 40px 25px;
+}
+
+.instructContainer ul
+{
+    color: #676767;
+
+    padding-left: 18px;
+
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+
+.instructContainer li
+{
+    margin-bottom: 20px;
+
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+.instructButtonContainer
+{
+    text-align: center;
+}
+
+.instructContainer button
+{
+    border: none;
+    border-radius: 5px;
+
+    background: #37C42F;
+
+    font-size: inherit;
+    color: white;
+
+    width: 60%;
+
+    margin-top: 20px;
+    padding: 5px;
+}
+
+@media screen and (max-height: 600px) {
+    .left .middle .myToyImage {
+        width: 120px;
+        height: 100px;
+    }
+
+    .logo-img
+    {
+        width: 40%;
+    }
+
+    .left h3
+    {
+        font-size: 24px;
+    }
+
+    .instructContainer
+    {
+        top: 5%;
     }
 }
 
@@ -514,91 +626,6 @@ input[type='range']:focus {
   background-color: rgba(255, 255, 255, 0.32);*/
 }
 
-.addToybox
-{
-    position: relative;
-    bottom: 40px;
-    right: 64px;
-
-    border: none;
-
-    background: #4D9E6F;
-
-    font-size: 16px;
-    color: white;
-
-    padding: 10px 20px;
-}
-
-.addToybox div
-{
-    font-size: 64px;
-}
-
-#instructCover
-{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-
-    background: rgba(0, 0, 0, 0.8);
-
-    width: 100%;
-    height: 100%;
-}
-
-.instructContainer
-{
-    position: relative;
-    top: 15%;
-    left: calc(20% - 10px);
-
-    background: white;
-
-    font-size: 32px;
-
-    width: 60%;
-
-    padding: 25px;
-    padding-bottom: 15px;
-    padding-left: 50px;
-}
-
-.instructContainer ul
-{
-    color: #676767;
-
-    padding-left: 18px;
-
-    list-style-type: decimal;
-}
-
-.instructContainer li
-{
-    margin-bottom: 5px;
-}
-
-.instructButtonContainer
-{
-    text-align: center;
-}
-
-.instructContainer button
-{
-    border: none;
-    border-radius: 5px;
-
-    background: #37C42F;
-
-    font-size: inherit;
-    color: white;
-
-    width: 60%;
-
-    margin-top: 20px;
-    padding: 3px;
-}
-
 #loading
 {
     position: fixed;
@@ -616,10 +643,6 @@ input[type='range']:focus {
 {
     width: 32px;
     height: 32px;
-}
-
-.logo-img {
-    width: 65%;
 }
 
 #seenAll

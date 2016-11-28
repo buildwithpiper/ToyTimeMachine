@@ -286,9 +286,11 @@
 
       $preloader = $(preloader);
 
-      if(isMobile())
+      var aspectRatio = preloader.width / preloader.height;
+
+      if(isMobile()) // Image sizing
       {
-        if(preloader.height < $(window).height() * 0.8)
+        /*if(preloader.height < $(window).height() * 0.8)
         {
           preloader.height = Math.min(preloader.height * 1.2, $(window).height() - 100);
         }
@@ -296,9 +298,37 @@
         if(preloader.width < $(window).width() * 0.8)
         {
           preloader.width = Math.min(preloader.width * 1.2, $(window).width() - 200);
-        }
+        }*/
+
         //preloader.width *= 2;
         //preloader.height *= 1.3;
+
+        /*preloader.width = $(window).width() - 200;
+        preloader.height = $(window).height() - 200;*/
+
+        if(preloader.width > preloader.height)
+        {
+          preloader.width = $(window).width() * 0.7;
+          preloader.height = Math.min(preloader.width * (1 / aspectRatio), $(window).height() - 150);
+        }
+        else
+        {
+          preloader.height = $(window).height() * 0.85;
+          preloader.width = Math.min(preloader.height * aspectRatio, $(window).width() - 150);
+        }
+      }
+      else
+      {
+        if(preloader.width > preloader.height)
+        {
+          preloader.width = $(window).width() * 0.5;
+          preloader.height = Math.min(preloader.width * (1 / aspectRatio), $(window).height() - 150);
+        }
+        else
+        {
+          preloader.height = $(window).height() * 0.7;
+          preloader.width = Math.min(preloader.height * aspectRatio, $(window).width() - 150);
+        }
       }
 
       $image.width(preloader.width);
