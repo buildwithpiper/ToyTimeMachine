@@ -20,7 +20,7 @@ mongoose.connect("mongodb://localhost/test");
 // Setup server
 require("./server/routes")(app);
 
-app.use(express.static(path.join(__dirname, "public/")));
+app.use(express.static(path.join(__dirname, "public/"), { maxAge: 86400000 /* 1d */ }));
 
 // Start server
 server.listen(80);
