@@ -22,7 +22,7 @@ module.exports = function(app) {
     // Index route
     app.route('/').get(function(req, res) {
         console.log(req.hostname);
-        if (req.hostname != "gifttimemachine") {
+        if (req.hostname != "gifttimemachine.com") {
             res.redirect(301, "http://gifttimemachine.com" + req.path)
         }
         res.sendFile(path.join(__dirname + "/../views/index.html"));
@@ -31,7 +31,7 @@ module.exports = function(app) {
 
     // Toybox route
     app.route('/toybox').get(function(req, res) {
-        if (req.hostname != "gifttimemachine") {
+        if (req.hostname != "gifttimemachine.com") {
             res.redirect(301, "http://gifttimemachine.com" + req.path + "?_id=" + req.query._id)
         }
         res.sendFile(path.join(__dirname + "/../views/toybox.html"));

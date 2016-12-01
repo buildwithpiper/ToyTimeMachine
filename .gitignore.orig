@@ -1,0 +1,10 @@
+node_modules/
+data/*
+<<<<<<< HEAD
+public/toys/
+=======
+toys/
+*.swp
+*.swo
+*.swn
+>>>>>>> 9743091ba6a10c38894532a2f7c289339e7b9f78
