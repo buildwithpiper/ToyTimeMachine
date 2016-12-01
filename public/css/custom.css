@@ -42,6 +42,14 @@ body {
     font-weight: bold;
 }
 
+.left #logo span {
+    text-decoration: none;
+}
+
+.left #logo span:hover {
+    text-decoration: none;
+}
+
 .left #logo img {
     /*position: relative;*/
     width: 130px;

@@ -73,7 +73,7 @@ $(document).ready(function() {
     //$('.fbshare').click(generateImage);
 
     if(isMobile()) { // Instructions for mobile users/other mobile setup
-        $("body").append("<div id='instructCover'><div class='instructContainer'><h4>Instructions:</h4><ul><li>Scroll through the decades.</li><li>Add 4 toys that changed your life to your toy box.</li><li>Share your collection with your loved ones.</li></ul><div class='instructButtonContainer'><button id='instructClose'>Ok got it!</button></div></div></div>");
+        $("body").append("<div id='instructCover'><div class='instructContainer'><h4>Instructions:</h4><ul><li>Scroll through the decades.</li><li>Add 4 gifts that changed your life to your toy box.</li><li>Share your collection with your loved ones.</li></ul><div class='instructButtonContainer'><button id='instructClose'>Ok got it!</button></div></div></div>");
     
         $('#instructClose').on("click", function()
         {
@@ -171,7 +171,7 @@ function addToy(toyUrl) {
             });
             $('.lb-close').trigger("click");
         } else {
-            alert("You have reached the maximum number of toys");
+            alert("You have reached the maximum number of gifts");
         }
     }
     if(isMobile())
@@ -251,7 +251,7 @@ function loadNewToys()
     }
     else if(!$('#seenAll').is(":visible"))
     {
-        $("#toys").append("<a href='https://playpiper.com/?utm_source=toytimemachine'><div id='seenAll'>You've seen all the toys in this decade!<br>Created by <img src='images/logo.svg'></div></a>");
+        $("#toys").append("<a href='https://playpiper.com/?utm_source=toytimemachine'><div id='seenAll'>You've seen all the gifts in this decade!<br>Created by <img src='images/logo.svg'></div></a>");
     }
 }
 
