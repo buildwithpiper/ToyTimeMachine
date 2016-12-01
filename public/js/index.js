@@ -73,7 +73,7 @@ $(document).ready(function() {
     //$('.fbshare').click(generateImage);
 
     if(isMobile()) { // Instructions for mobile users/other mobile setup
-        $("body").append("<div id='instructCover'><div class='instructContainer'><h4>Instructions:</h4><ul><li>Scroll through the decades.</li><li>Add 4 gifts that changed your life to your toy box.</li><li>Share your collection with your loved ones.</li></ul><div class='instructButtonContainer'><button id='instructClose'>Ok got it!</button></div></div></div>");
+        $("body").append("<div id='instructCover'><div class='instructContainer'><h4>Instructions:</h4><ul><li>Scroll through the decades.</li><li>Add 4 gifts that changed your life to your gift box.</li><li>Share your collection with your loved ones.</li></ul><div class='instructButtonContainer'><button id='instructClose'>Ok got it!</button></div></div></div>");
     
         $('#instructClose').on("click", function()
         {
