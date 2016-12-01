@@ -95,7 +95,7 @@
   // Attach event handlers to the new DOM elements. click click click
   Lightbox.prototype.build = function() {
     var self = this;
-    $('<div id="lightboxOverlay" class="lightboxOverlay"></div><div id="lightbox" class="lightbox"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /><div class="lb-nav"><a class="lb-prev" href="" ></a><a class="lb-next" href="" ></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div>').appendTo($('body'));
+    $('<div id="lightboxOverlay" class="lightboxOverlay"></div><div id="lightbox" class="lightbox"><div class="lb-outerContainer"><div class="lb-closeContainer"><a class="lb-close"></a></div><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /><div class="lb-nav"><a class="lb-prev" href="" ></a><a class="lb-next" href="" ></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div></div></div></div>').appendTo($('body'));
 
     // Cache jQuery objects
     this.$lightbox       = $('#lightbox');
@@ -286,6 +286,51 @@
 
       $preloader = $(preloader);
 
+      var aspectRatio = preloader.width / preloader.height;
+
+      if(isMobile()) // Image sizing
+      {
+        /*if(preloader.height < $(window).height() * 0.8)
+        {
+          preloader.height = Math.min(preloader.height * 1.2, $(window).height() - 100);
+        }
+
+        if(preloader.width < $(window).width() * 0.8)
+        {
+          preloader.width = Math.min(preloader.width * 1.2, $(window).width() - 200);
+        }*/
+
+        //preloader.width *= 2;
+        //preloader.height *= 1.3;
+
+        /*preloader.width = $(window).width() - 200;
+        preloader.height = $(window).height() - 200;*/
+
+        if(preloader.width > preloader.height)
+        {
+          preloader.width = $(window).width() * 0.7;
+          preloader.height = Math.min(preloader.width * (1 / aspectRatio), $(window).height() - 150);
+        }
+        else
+        {
+          preloader.height = $(window).height() * 0.85;
+          preloader.width = Math.min(preloader.height * aspectRatio, $(window).width() - 150);
+        }
+      }
+      else
+      {
+        if(preloader.width > preloader.height)
+        {
+          preloader.width = $(window).width() * 0.5;
+          preloader.height = Math.min(preloader.width * (1 / aspectRatio), $(window).height() - 150);
+        }
+        else
+        {
+          preloader.height = $(window).height() * 0.7;
+          preloader.width = Math.min(preloader.height * aspectRatio, $(window).width() - 150);
+        }
+      }
+
       $image.width(preloader.width);
       $image.height(preloader.height);
 
@@ -312,14 +357,13 @@
           if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
             imageWidth  = maxImageWidth;
             imageHeight = parseInt(preloader.height / (preloader.width / imageWidth), 10);
-            $image.width(imageWidth);
-            $image.height(imageHeight);
           } else {
             imageHeight = maxImageHeight;
             imageWidth = parseInt(preloader.width / (preloader.height / imageHeight), 10);
-            $image.width(imageWidth);
-            $image.height(imageHeight);
           }
+
+          $image.width(imageWidth);
+          $image.height(imageHeight);
         }
       }
       self.sizeContainer($image.width(), $image.height());

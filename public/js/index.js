@@ -1,48 +1,135 @@
 $(document).ready(function() {
+    handleSlide();
 
     $(window).resize(function() {
         handleSlide();
-    })
+    });
 
     $("#yearSelection").on("input", function() {
         handleSlide();
         $("#yearIndicator").html($(this).val());
-    })
+    });
 
     $("#yearSelection").change(function() {
         searchFor($(this).val());
         $("#yearIndicator").html($(this).val());
-    })
+    });
 
-    $(".deleteOverlay").click(function() {
-        console.log(($(this)[0].parentElement.id).substr(-1));
-        removeToy(($(this)[0].parentElement.id).substr(-1));
-    })
+    $(".left .cover").on("click", function()
+    {
+        toggleMenu();
+    });
+
+    if(isMobile())
+    {
+        $(".myToyImage").on("click", function(event) {
+            removeToy($(this)[0].id.substr(-1));
+            if(JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1))
+            {
+                toggleMenu();
+            }
+
+            event.preventDefault();
+            return false;
+        });
+    }
+    else
+    {
+        $(".deleteOverlay").click(function() {
+
+            removeToy(($(this)[0].parentElement.id).substr(-1));
+            if(isMobile() && JSON.parse(localStorage.getItem("user")).toys.length <= ($(this)[0].parentElement.id).substr(-1) - 1)
+            {
+                toggleMenu();
+            }
+
+            /*if(isMobile())
+            {
+                $(this).hide();
+            }*/
+        });
+    }
 
     $(".hamburger").click(function() {
-        $(".left").fadeToggle();
-        $("#white").fadeToggle();
-        $("#black").fadeToggle();
+        toggleMenu();
 
-    })
+    });
 
     lightbox.option({
         'showImageNumberLabel': false,
         'wrapAround': true
-    })
+    });
+
+    // Do initial load
+    searchFor(1970);
+    $("#yearIndicator").html(1970);
 
     // Load images into boxes
     populateToys();
 
+    // Adds user id to share url
+    updateShareUrl();
+
+    //$('.fbshare').click(generateImage);
+
+    if(isMobile()) { // Instructions for mobile users/other mobile setup
+        $("body").append("<div id='instructCover'><div class='instructContainer'><h4>Instructions:</h4><ul><li>Scroll through the decades.</li><li>Add 4 gifts that changed your life to your toy box.</li><li>Share your collection with your loved ones.</li></ul><div class='instructButtonContainer'><button id='instructClose'>Ok got it!</button></div></div></div>");
+    
+        $('#instructClose').on("click", function()
+        {
+            $('#instructCover').fadeOut(300, function()
+            {
+                $(this).remove();
+            });
+        });
+    }
+
+    $(document).on("scroll", function()
+    {
+        checkScroll();
+    });
 });
+
+var imagePaths = {1940: [], 1950: [], 1960: [], 1970: [], 1980: [], 1990: [], 2000: []};
+var loadCount = 0;
+var currentDecade = 0;
+var imagesLoading = 0;
+var TOY_LOAD_LIMIT = 30;
+
+function toggleMenu()
+{
+    /*$(".left").fadeToggle();
+    //$("#white").fadeToggle();
+    $("#black").fadeToggle();*/
+
+    $(".left, #black").toggle("slide");
+}
+
+function isMobile()
+{
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+}
+
+function generateImage()
+{
+    var user = JSON.parse(localStorage.getItem("user"));
+    if(user.toys.length == 4)
+    {
+        param = {
+            id: user._id
+        };
+        $.get("/api/v1/toys/collage", param, function(data) {
+            //$('meta[property="og:image"]').remove();
+            //$('head').append( '<meta property="og:image" content="toytimemachine.us/collages/' + user._id  + '.jpg"/>' );
+        });
+    }
+}
 
 // Load images into boxes
 function populateToys() {
     if (localStorage.getItem("user") != null) {
         var user = JSON.parse(localStorage.getItem("user"));
-        // console.log(user);
         for (var i = 0; i < 4; i++) {
-            console.log("url(\"" + user.toys[i] + "\")");
             if (user.toys[i]) {
                 $("#myToy" + (i + 1)).css("background-image", "url(\"" + user.toys[i] + "\")");
             } else {
@@ -57,9 +144,7 @@ function createUser() {
     var param = {};
     $.get("/api/v1/users/create", param, function(data) {
             if (data.user.length != 0) {
-                // console.log(data.user);
                 localStorage.setItem("user", JSON.stringify(data.user));
-                console.log(JSON.parse(localStorage.getItem("user")));
             }
         })
         // }
@@ -69,6 +154,8 @@ function addToy(toyUrl) {
     // IF the user doesnt exist, create the user and add the toy
     if (localStorage.getItem("user") == null) {
         createAndAdd(toyUrl);
+        $('.lb-close').trigger("click");
+
     } else {
         // Check if we are at max toys
         if (JSON.parse(localStorage.getItem("user")).toys.length < 4) {
@@ -78,22 +165,24 @@ function addToy(toyUrl) {
             };
             $.get("/api/v1/users/addtoy", param, function(data) {
                 if (data.user.length != 0) {
-                    console.log(data.user);
                     localStorage.setItem("user", JSON.stringify(data.user));
-                    console.log(JSON.parse(localStorage.getItem("user")));
                     populateToys();
                 }
             });
+            $('.lb-close').trigger("click");
         } else {
-            alert("You have reached the maximum number of toys");
+            alert("You have reached the maximum number of gifts");
         }
+    }
+    if(isMobile())
+    {
+        toggleMenu();
     }
 }
 
 function createAndAdd(toyUrl) {
     $.get("/api/v1/users/create", {}, function(data) {
         if (data.user.length != 0) {
-            // console.log(data.user);
             localStorage.setItem("user", JSON.stringify(data.user));
             var param = {
                 toyUrl: $(toyUrl).data("url"),
@@ -102,8 +191,8 @@ function createAndAdd(toyUrl) {
             $.get("/api/v1/users/addtoy", param, function(data) {
                 if (data.user.length != 0) {
                     localStorage.setItem("user", JSON.stringify(data.user));
-                    console.log(JSON.parse(localStorage.getItem("user")));
                     populateToys();
+                    updateShareUrl();
                 }
             });
         }
@@ -112,24 +201,82 @@ function createAndAdd(toyUrl) {
 
 function clearLocalUser() {
     localStorage.removeItem("user");
-    console.log(localStorage.getItem("user"));
 }
 
+function checkScroll()
+{
+    if($(window).scrollTop() >= $(document).height() - 70 - $(window).height())
+    {
+        if(!$('#loading').is(":visible") && imagesLoading == 0)
+        {
+            loadNewToys();
+        }
+    }
+}
 
 function searchFor(query) {
-    console.log("Searching for toys...");
     var param = {
         decade: query
     };
     $("#toys").html("");
     $.get("/api/v1/toys/", param, function(data) {
         if (data.toys.length != 0) {
-            // console.log(data.toys);
-            for (var i = 0; i < data.toys.length; i++) {
-                $("#toys").append("<a href=\"" + data.toys[i].imageUrl + "\" data-lightbox=\"toy\" data-title=\"<input type='button' data-url='" + data.toys[i].imageUrl + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'\" src=\"" + data.toys[i].imageUrl + "\"/></a>")
+            if(imagePaths[query].length == 0)
+            {
+                imagePaths[query] = data.toys;
             }
+
+            currentDecade = query;
+            loadCount = 0;
+
+            //console.log(data.toys);
+
+            loadNewToys();
         }
     })
+}
+
+function loadNewToys()
+{
+    if(loadCount * TOY_LOAD_LIMIT < imagePaths[currentDecade].length)
+    {
+        $("#loading").show();
+
+        for (var i = loadCount * TOY_LOAD_LIMIT; i < Math.min((loadCount + 1) * TOY_LOAD_LIMIT, imagePaths[currentDecade].length); i++) {
+            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<img src='images/addgift.png' data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'; imageLoaded()\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+            imagesLoading++;
+        }
+
+        loadCount++;
+    }
+    else if(!$('#seenAll').is(":visible"))
+    {
+        $("#toys").append("<a href='https://playpiper.com/?utm_source=toytimemachine'><div id='seenAll'>You've seen all the gifts in this decade!<br>Created by <img src='images/logo.svg'></div></a>");
+    }
+}
+
+function lastToyCreatesScrollbar()
+{
+    return $("#toys a:last-child").offset().top > $(window).height();
+}
+
+function imageLoaded()
+{
+    imagesLoading--;
+
+    if(imagesLoading == 0)
+    {
+        $("#loading").hide();
+
+        if(!lastToyCreatesScrollbar())
+        {
+            loadNewToys();
+        }
+        else
+        {
+            checkScroll();
+        }
+    }
 }
 
 function removeToy(index) {
@@ -145,11 +292,16 @@ function removeToy(index) {
     });
 }
 
+function updateShareUrl() {
+    if (localStorage.getItem("user") != null) {
+        var user = JSON.parse(localStorage.getItem("user"));
+        $(".fbshare").attr("href", "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.toytimemachine.us/toybox?_id=" + user._id + "&amp;src=sdkpreparse");
+    }
+}
+
 function getSliderWidth() {
     var slider = $("#yearSelection");
     var pointDistance = slider.width() / slider.prop("step");
-    console.log(pointDistance);
-    console.log(slider);
 }
 
 function handleSlide() {
@@ -162,6 +314,6 @@ function handleSlide() {
     var interval = (slider.width() - slider.width() * .03) / numSteps;
 
     var newPos = currentPosition * interval;
-    text.css("left", (newPos - 10) + "px");
-    console.log(currentPosition);
+    var distanceFromLeft = newPos - 10;
+    text.css({"left": (newPos - 10) + "px", "width": "calc(100% - " + distanceFromLeft + "px)"});
 }

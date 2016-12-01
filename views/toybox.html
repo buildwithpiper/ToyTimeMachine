@@ -2,36 +2,93 @@
 <html>
 
 <head>
-    <title></title>
+    <title>My Gift Box</title>
+    <meta property="og:url" content="http://www.gifttimemachine.com/toybox" />
+    <meta property="og:title" content="My Gift Time Machine" />
+    <meta property="og:description" content="Go back in time to find the gifts that changed your life" />
+    <meta property="og:image" content="http://gifttimemachine.com/images/giftshare.png" />
     <link href="css/sweetalert.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">
     <link href="css/toybox.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/lightbox.js"></script>
     <script src="js/sweetalert.min.js"></script>
+    <script src="js/toybox.js"></script>
+    <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-88189004-1', 'auto');
+ga('send', 'pageview');
+
+    </script>
 </head>
 
 <body>
-    <div class="textbox">
+    <div class="wrapper">
+        <a href="https://playpiper.com/?utm_source=gifttimemachine" class="link">
+            <div class="logoContainer">
+                <img src="images/logoToy.png" class="logo">
+                <div class="created">Created by <img src="images/logo.svg"></div>
+            </div>
+        </a>
+
+        <div class="midWrapper">
+            <h3>Check out the most meaningful<br>toys of my childhood</h3>
+
+            <div class="imggrid">
+                <a href="/">
+                    <div class="imgbox" id="img1">
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="imgbox" id="img2">
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="imgbox" id="img3">
+                    </div>
+                </a>
+                <a href="/">
+                    <div class="imgbox" id="img4">
+                    </div>
+                </a>
+            </div>
+
+            <a href="/" class="button"><img src="images/etmbutton.png"></a>
+        </div>
+    </div>
+
+    <!--<div class="textbox">
+    <br>
         <h1>My Toy Collection</h1>
         <h3>These are the toys you played with.</h3>
     </div>
     <div class="imggrid">
-        <div class="imgbox" id="img1">
-        </div>
-        <div class="imgbox" id="img1">
-        </div>
-        <div class="imgbox" id="img1">
-        </div>
-        <div class="imgbox" id="img1">
-        </div>
+        <a href="/">
+            <div class="imgbox" id="img1">
+            </div>
+        </a>
+        <a href="/">
+            <div class="imgbox" id="img2">
+            </div>
+        </a>
+        <a href="/">
+            <div class="imgbox" id="img3">
+            </div>
+        </a>
+        <a href="/">
+            <div class="imgbox" id="img4">
+            </div>
+        </a>
     </div>
     <div class="footer">
-        <a href="https://www.playpiper.com" target="_blank"><h5>Created By </h5>
+        <a href="https://playpiper.com/?utm_source=toytimemachine" target="_blank"><h5>Created By </h5>
                 <img src="images/logo.svg">
                 </a>
-    </div>
-    <script src="js/toybox.js"></script>
+    </div>-->
 </body>
 
 </html>

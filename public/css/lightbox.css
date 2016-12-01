@@ -38,6 +38,9 @@ body.lb-disable-scrolling {
 
   /* Image border */
   border: 4px solid white;
+
+  position: relative;
+  bottom: 40px;
 }
 
 .lightbox a img {
@@ -190,24 +193,51 @@ body.lb-disable-scrolling {
   color: #999999;
 }
 
-.lb-data .lb-close {
+.lb-outerContainer .lb-close {
   display: block;
   float: right;
   width: 30px;
   height: 30px;
-  background: url(../images/close.png) top right no-repeat;
+  background: url(../images/close.png) center center no-repeat;
   text-align: right;
   outline: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  opacity: 0.7;
+  opacity: 1;
   -webkit-transition: opacity 0.2s;
   -moz-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s;
+
+  position: relative;
+  bottom: 15px;
+  left: 15px;
+
+  border-radius: 20px;
+
+  background-color: #525252;
+  background-size: 18px;
+
+  padding: 5px;
+
+  z-index: 99999;
+}
+
+@media screen and (max-width: 1000px) { /* Mobile */
+  .lb-outerContainer .lb-close {
+    width: 64px;
+    height: 64px;
+
+    bottom: 32px;
+    left: 32px;
+
+    border-radius: 40px;
+
+    background-size: 32px;
+  }
 }
 
 .lb-data .lb-close:hover {
   cursor: pointer;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
+  opacity: 0.85;
 }

@@ -1,3 +1,6 @@
 node_modules/
 data/*
 public/toys/
+*.swp
+*.swo
+*.swn

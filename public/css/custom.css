@@ -1,6 +1,13 @@
+@font-face
+{
+    font-family: Klavika;
+    src: url('Klavika Regular Plain.otf');
+}
+
 body {
     margin: 0;
     overflow-x: hidden;
+    font-family: Klavika, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .right #toys img {
@@ -14,22 +21,33 @@ body {
     height: 100vh;
     position: fixed;
     left: 0;
-    width: 23%;
+    width: 15%;
     background: #110033;
     padding: 1%;
+    overflow-y: auto;
 }
 
 .left h1 {
     font-size: 48px;
     color: white;
-    margin-bottom: 0;
+    margin: 0px;
 }
 
 .left #logo {
     width: 100%;
-    padding-top: 20px;
+    padding-top: 1vh;
     top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 2vh;
+    color: white;
+    font-weight: bold;
+}
+
+.left #logo span {
+    text-decoration: none;
+}
+
+.left #logo span:hover {
+    text-decoration: none;
 }
 
 .left #logo img {
@@ -50,7 +68,8 @@ body {
 
 .left h3 {
     color: white;
-    font-size: 24px
+    font-size: 24px;
+    margin: 1vh;
 }
 
 .left .middle {
@@ -58,15 +77,25 @@ body {
 }
 
 .left .middle .myToyImage {
-    width: 96px;
-    height: 96px;
+    width: 84px;
+    height: 84px;
     margin: 20px auto;
     border-width: 5px;
     border-style: solid;
-    background-image: url("../images/no-toy-selected.png");
+    border-radius: 10px;
+    background-image: url("../images/no-gift-selected.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+
+@media screen and (max-height: 900px) {
+    .left .middle .myToyImage {
+        display: inline-block;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        margin-right: 1vh;
+    }
 }
 
 .left .middle .myToyImage .deleteOverlay {
@@ -86,6 +115,27 @@ body {
     display: block;
 }
 
+@media screen and (min-height: 600px) {
+    /*.left .bottom
+    {
+        position: absolute;
+        left: calc(50% - 90px);
+        bottom: 100px;
+
+        width: 92%;
+    }
+
+    .left .bottom hr
+    {
+        position: relative;
+        right: calc(50% - 90px);
+    }
+
+    .left .bottom .bottomInner
+    {
+        width: 180px;
+    }*/
+}
 
 /*.left .middle .myToyImage .deleteOverlay span {
 	position: relative;
@@ -94,26 +144,30 @@ body {
 }*/
 
 .left .middle #myToy1 {
-    border-color: red;
+    border-color: #e13e5b;
 }
 
 .left .middle #myToy2 {
-    border-color: yellow;
+    border-color: #eecc49;
 }
 
 .left .middle #myToy3 {
-    border-color: green;
+    border-color: #8cc347;
 }
 
 .left .middle #myToy4 {
-    border-color: blue;
+    border-color: #1fa2d6;
+}
+
+.left .middle hr {
+	margin-top: 2vh;
 }
 
 .right {
     position: relative;
     float: right;
     right: 0;
-    width: 75%;
+    width: 83%;
     /*padding: 10px 2.5%;*/
 }
 
@@ -134,7 +188,7 @@ body {
     position: absolute;
     right: 20px;
     top: 0;
-    width: 70%;
+    width: 50%;
     height: 100%;
 }
 
@@ -162,9 +216,9 @@ body {
 
 .right .topBar .infoBox {
     position: absolute;
-    padding: 15px 10px;
+    padding: 15px 30px;
     top: 0;
-    width: 25%;
+    width: 50%;
     height: 80%;
 }
 
@@ -176,7 +230,57 @@ body {
     display: none;
 }
 
-@media screen and (max-width: 1000px) {
+.left .cover
+{
+    display: none;
+}
+
+.fb-share-button img
+{
+    width: 100%;
+    /*height: 50px;*/
+
+    margin-bottom: 13px;
+}
+
+.addToybox
+{
+    position: relative;
+    bottom: 40px;
+    right: 64px;
+
+    z-index: 99999;
+}
+
+@media screen and (max-width: 1000px) { /* Mobile */
+    .addToybox
+    {
+        bottom: 100px;
+        right: 124px;
+
+        width: 200px;
+        height: 200px;
+    }
+    .fb-share-button img
+    {
+        height: 60px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        width: 3em !important;
+        height: 3em !important;
+    }
+    input[type='range']::-moz-slider-thumb {
+        width: 3em !important;
+        height: 3em !important;
+    }
+    input[type='range']::-ms-slider-thumb {
+        width: 3em !important;
+        height: 3em !important;
+    }
+    .left .middle .myToyImage .deleteOverlay {
+        width: 0px;
+        height: 0px;
+    }
     .right {
         position: relative;
         float: right;
@@ -187,18 +291,56 @@ body {
     .left {
         z-index: 1000;
         display: none;
-        width: 100%;
+        width: 40%;
+
+        overflow-y: scroll;
+    }
+    .left .cover
+    {
+        display: block;
+
+        position: fixed;
+        top: 0px;
+        left: calc(40% + 20px);
+
+        background: rgba(0, 0, 0, 0.8);
+
+        width: 1000px;
+        height: 100%;
+
+        z-index: 99999;
+    }
+    .left h3 {
+        font-size: 36px;
+    }
+    .left .middle .myToyImage
+    {
+        display: inline-block;
+
+        width: 175px;
+        height: 175px;
+
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        margin-right: 1vh;
     }
     .hamburger {
         display: block;
         position: fixed;
-        top: 10px;
-        right: 10px;
-        height: 30px;
-        width: 30px;
-        z-index: 100000;
+        top: 30px;
+        left: 30px;
+        height: 100px;
+        width: 100px;
+        z-index: 9998;
         background-position: 50% 50%;
         background-size: cover;
+    }
+    .right #toys img {
+        height: 200px;
+    }
+    .infoBox
+    {
+        display: none;
     }
     #black {
         background-image: url("../images/hamburger.png");
@@ -231,20 +373,109 @@ body {
         width: 100%;
         left: -15px;
         margin: 0;
-        top: 40%;
+        top: 30%;
+        font-size: 32px;
         /*right: 20px;*/
         /*height: 38px;*/
     }
     .right .topBar .yearStuff {
         position: absolute;
-        right: 30px;
+        right: 60px;
         top: 0;
-        width: 60%;
-        height: 100%;
+        width: 50%;
+        height: 80%;
     }
-    .right #toys img {
+}
+
+.logo-img {
+    width: 65%;
+}
+
+#instructCover
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    width: 100%;
+    height: 100%;
+}
+
+.instructContainer
+{
+    position: relative;
+    top: 15%;
+    left: calc(20% - 10px);
+
+    background: white;
+
+    font-size: 50px;
+
+    width: 60%;
+
+    padding: 40px 25px;
+}
+
+.instructContainer ul
+{
+    color: #676767;
+
+    padding-left: 18px;
+
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+
+.instructContainer li
+{
+    margin-bottom: 20px;
+
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+.instructButtonContainer
+{
+    text-align: center;
+}
+
+.instructContainer button
+{
+    border: none;
+    border-radius: 5px;
+
+    background: #37C42F;
+
+    font-size: inherit;
+    color: white;
+
+    width: 60%;
+
+    margin-top: 20px;
+    padding: 5px;
+}
+
+@media screen and (max-height: 600px) {
+    .left .middle .myToyImage {
+        width: 120px;
         height: 100px;
-        margin: 5px;
+    }
+
+    .logo-img
+    {
+        width: 40%;
+    }
+
+    .left h3
+    {
+        font-size: 24px;
+    }
+
+    .instructContainer
+    {
+        top: 5%;
     }
 }
 
@@ -278,7 +509,9 @@ input[type='range']::-webkit-slider-runnable-track {
     /*height: 2.25em;*/
     border-radius: 1.125em;
     /*box-shadow: inset 0 -1px 1px #fff, inset 0 .5em .5em #c4c4c4, inset 0 0 0 .375em #efefef,  inset 0 1px .125em .375em black,  inset 0 0 0 1px #eee;*/
-    background: linear-gradient(#f5f5f5, #eeeeee 35%, #bfbfbf);
+    /*background: linear-gradient(#f5f5f5, #eeeeee 35%, #bfbfbf);*/
+    background: rgb(170, 170, 170);
+    height: 1.2em;
 }
 
 .js input[type='range']::-webkit-slider-runnable-track {
@@ -294,7 +527,9 @@ input[type='range']::-moz-range-track {
     /*height: 2.25em;*/
     border-radius: 1.125em;
     /*box-shadow: inset 0 -1px 1px #fff, inset 0 .5em .5em #c4c4c4, inset 0 0 0 .375em #efefef,  inset 0 1px .125em .375em black,  inset 0 0 0 1px #eee;*/
-    background: linear-gradient(#f5f5f5, #eeeeee 35%, #bfbfbf);
+    /*background: linear-gradient(#f5f5f5, #eeeeee 35%, #bfbfbf);*/
+    background: rgb(170, 170, 170);
+    height: 1.2em;
 }
 
 .js input[type='range']::-moz-range-track {
@@ -312,6 +547,8 @@ input[type='range']::-ms-track {
     /*box-shadow: inset 0 -1px 1px #fff, inset 0 .5em .5em #c4c4c4, inset 0 0 0 .375em #efefef,  inset 0 1px .125em .375em black,  inset 0 0 0 1px #eee;*/
     /*background: linear-gradient(#f5f5f5, #eeeeee 35%, #bfbfbf);*/
     color: transparent;
+    background: rgb(170, 170, 170);
+    height: 1.2em;
 }
 
 input[type='range']::-ms-fill-lower {
@@ -326,7 +563,7 @@ input[type='range']::-ms-fill-upper {
 }
 
 input[type='range']::-webkit-slider-thumb {
-    margin-top: -.375em;
+    margin-top: -0.7em;
     box-sizing: border-box;
     border: none;
     padding: .375em;
@@ -339,6 +576,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 input[type='range']::-moz-range-thumb {
+    margin-top: -0.7em;
     box-sizing: border-box;
     border: none;
     padding: .375em;
@@ -351,6 +589,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 input[type='range']::-ms-thumb {
+    margin-top: -0.7em;
     box-sizing: border-box;
     border: none;
     padding: .375em;
@@ -393,4 +632,39 @@ input[type='range']:focus {
     outline: none;
     /*  box-shadow: 0 .125em .125em #fff;
   background-color: rgba(255, 255, 255, 0.32);*/
+}
+
+#loading
+{
+    position: fixed;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+
+    display: none;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    padding: 20px;
+}
+
+#loading img
+{
+    width: 32px;
+    height: 32px;
+}
+
+#seenAll
+{
+    text-align: center;
+    color: gray;
+
+    margin-top: 20px;
+}
+
+#seenAll img
+{
+    width: 200px;
+    height: 50px !important;
+
+    vertical-align: middle;
 }

@@ -9,6 +9,10 @@ var mongoose = require("mongoose");
 var Toy = require("../models/toy.js");
 var User = require("../models/user.js");
 var path = require("path");
+var fs = require("fs");
+
+var buildImage = require('./buildImage.js')
+
 
 // Store database connection
 var db = mongoose.connection;
@@ -17,12 +21,19 @@ db.on("error", console.error.bind(console, "connection error:"));
 module.exports = function(app) {
     // Index route
     app.route('/').get(function(req, res) {
+        console.log(req.hostname);
+        if (req.hostname != "gifttimemachine") {
+            res.redirect(301, "http://gifttimemachine.com" + req.path)
+        }
         res.sendFile(path.join(__dirname + "/../views/index.html"));
         console.log("Serving index");
     });
 
     // Toybox route
     app.route('/toybox').get(function(req, res) {
+        if (req.hostname != "gifttimemachine") {
+            res.redirect(301, "http://gifttimemachine.com" + req.path + "?_id=" + req.query._id)
+        }
         res.sendFile(path.join(__dirname + "/../views/toybox.html"));
     });
 
@@ -31,12 +42,27 @@ module.exports = function(app) {
     app.route('/api/v1/toys/').get(function(req, res) {
         var year = req.query.year;
         var decade = req.query.decade;
-        Toy.find({ decade: { $eq: decade } }, function(err, toys) {
+        
+        const dir = './public/toys/' + decade;
+        fs.readdir(dir, (err, files) => {
+          res.json({ toys: files.map(file => 'toys/' + decade + '/' + file) })
+        })
+        // sendFile(path.join(__dirname + "/toys/" + decade + "/"
+        /*Toy.find({ decade: { $eq: decade } }, function(err, toys) {
             if (err) return handleError(err);
             res.json({ toys: toys });
-        })
+        })*/
     });
 
+    // Create composite image
+    app.route('/api/v1/toys/collage').get(function(req, res) {
+        var id = req.query.id
+        User.findOne({ _id: { $eq: id } }, function(err, user) {
+            if (err) return console.log(err);
+            buildImage.preCreateImage(user.toys, id);
+            res.json( {collageUrl: "collages/" + id + ".jpg"} );
+        })
+    });
 
     /* USER ROUTES */
     // Create a user
@@ -95,7 +121,7 @@ module.exports = function(app) {
         var toyIndex = req.query.toyIndex;
         User.findOne({_id: {$eq: id}}, function(err, user) {
             if (err) return console.log(err);
-            user.toys.splice(toyIndex, toyIndex + 1);
+            user.toys.splice(toyIndex, 1);
             user.save();
             res.json({ user: user });
             console.log("Removed " + toyIndex + " from array: " + user.toys);
