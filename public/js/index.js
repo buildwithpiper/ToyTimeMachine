@@ -243,7 +243,7 @@ function loadNewToys()
         $("#loading").show();
 
         for (var i = loadCount * TOY_LOAD_LIMIT; i < Math.min((loadCount + 1) * TOY_LOAD_LIMIT, imagePaths[currentDecade].length); i++) {
-            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<img src='images/addToy.png' data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'; imageLoaded()\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
+            $("#toys").append("<a href=\"" + imagePaths[currentDecade][i] + "\" data-lightbox=\"toy\" data-title=\"<img src='images/addgift.png' data-url='" + imagePaths[currentDecade][i] + "' onclick='addToy(this)' class='addToybox'>\"</a><img onerror=\"this.style.display='none'; imageLoaded()\" onload='imageLoaded()' src=\"" + imagePaths[currentDecade][i] + "\"/></a>")
             imagesLoading++;
         }
 
